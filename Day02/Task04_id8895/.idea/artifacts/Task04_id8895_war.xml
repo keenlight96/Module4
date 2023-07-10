@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Task04_id8895:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Task04_id8895</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Task04_id8895-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Task04_id8895:war exploded" />
+    </root>
+  </artifact>
+</component>
