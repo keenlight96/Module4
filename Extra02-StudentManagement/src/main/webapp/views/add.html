@@ -11,8 +11,8 @@
 </head>
 <body>
 <div class="container">
-    <h2>Add a new Student</h2>
-    <form action="/add" method="post">
+    <h2>Add a new Account</h2>
+    <form th:action="@{/add}" th:method="post" th:object="${account}" enctype="multipart/form-data">
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -24,16 +24,16 @@
             </thead>
             <tbody>
             <tr>
-                <td hidden="hidden"><input type="text" name="id" value="0"></td>
-                <td><input type="text" name="username"></td>
-                <td><input type="text" name="password"></td>
-                <td><input type="text" name="avatar"></td>
-                <td><input type="text" name="birthday"></td>
+                <td hidden="hidden"><input type="text" th:field="*{id}" value="0"></td>
+                <td><input type="text" th:field="*{username}"></td>
+                <td><input type="text" th:field="*{password}"></td>
+                <td><input type="file" th:name="imgAvatar"></td>
+                <td><input type="text" th:field="*{birthday}"></td>
             </tr>
             </tbody>
         </table>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="/home" class="btn btn-danger">Cancel</a>
+        <a th:href="@{/home}" class="btn btn-danger">Cancel</a>
     </form>
 </div>
 </body>

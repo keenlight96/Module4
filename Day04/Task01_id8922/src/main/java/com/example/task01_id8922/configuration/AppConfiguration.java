@@ -1,4 +1,4 @@
-package com.extra02studentmanagement.configuration;
+package com.example.task01_id8922.configuration;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -6,9 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -17,7 +15,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.extra02studentmanagement")
+@ComponentScan("com.example.task01_id8922")
 public class AppConfiguration implements WebMvcConfigurer,  ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -52,19 +50,5 @@ public class AppConfiguration implements WebMvcConfigurer,  ApplicationContextAw
         viewResolver.setTemplateEngine(templateEngine());
         viewResolver.setCharacterEncoding("UTF-8");
         return viewResolver;
-    }
-
-    @Bean
-    public CommonsMultipartResolver multipartResolver(){
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSizePerFile(90000000);
-        return multipartResolver;
-    }
-
-    @Override
-    // chỉ cho Spring biết chỗ lấy tài liệu tĩnh.(js,css,img)
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("file:G:\\My Drive\\Study\\Codegym\\Module4\\Extra02-StudentManagement\\src\\main\\webapp\\");
     }
 }

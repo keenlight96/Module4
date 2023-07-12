@@ -11,7 +11,7 @@
 <body>
 <div class="container">
     <h2>Edit a Student</h2>
-    <form action="/edit" method="post">
+    <form th:action="@{/edit}" th:method="post"  enctype="multipart/form-data">
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -27,13 +27,13 @@
                 <td hidden="hidden"><input type="text" name="id" th:value="*{id}"></td>
                 <td><input type="text" name="username" th:value="*{username}"></td>
                 <td><input type="text" name="password" th:value="*{password}"></td>
-                <td><input type="text" name="avatar" th:value="*{avatar}"></td>
+                <td><input type="file" name="imgAvatar"></td>
                 <td><input type="text" name="birthday" th:value="*{birthday}"></td>
             </tr>
             </tbody>
         </table>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="/home" class="btn btn-danger">Cancel</a>
+        <a th:href="@{/home}" class="btn btn-danger">Cancel</a>
     </form>
 </div>
 </body>

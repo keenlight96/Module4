@@ -1,10 +1,6 @@
-package com.extra02studentmanagement.configuration;
+package com.example.task01_id8922.configuration;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletRegistration;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -22,5 +18,4 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-
 }

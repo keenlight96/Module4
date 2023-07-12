@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JSP - Hello World</title>
+</head>
+<body>
+</h1>
+<br/>
+<form th:action="@{/login}" method="post">
+    <table th:object="${account}">
+        <tr>
+            <td>Username</td>
+            <td><input type="text" th:field="*{username}"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="text" th:field="*{password}"></td>
+        </tr>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
