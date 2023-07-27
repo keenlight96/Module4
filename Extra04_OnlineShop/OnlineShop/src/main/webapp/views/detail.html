@@ -27,6 +27,9 @@
 
     <!-- Template Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
+
+    <!-- Rating Stylesheet -->
+    <link rel="stylesheet" href="../css/rating-style.css">
 </head>
 
 <body>
@@ -113,13 +116,31 @@
                 </div>
                 <!-- Blog Detail End -->
 
+                <!-- All Rating Start -->
+                <p th:text="'Average Rating: '+${productRating}"></p>
+                <!-- All Rating End -->
+
+                <!-- Rating Start -->
+                <div class="mb-5" th:if="${session.currentUser != null && isBought == true}">
+                    <div class="star-wrapper">
+                        <a th:href="@{/product/rating(productId = ${product.id}, rate = 5)}" class="fas fa-star s1" th:style="${userRating == 5 ? 'color: gold' : ''}"></a>
+                        <a th:href="@{/product/rating(productId = ${product.id}, rate = 4)}" class="fas fa-star s2" th:style="${userRating >= 4 ? 'color: gold' : ''}"></a>
+                        <a th:href="@{/product/rating(productId = ${product.id}, rate = 3)}" class="fas fa-star s3" th:style="${userRating >= 3 ? 'color: gold' : ''}"></a>
+                        <a th:href="@{/product/rating(productId = ${product.id}, rate = 2)}" class="fas fa-star s4" th:style="${userRating >= 2 ? 'color: gold' : ''}"></a>
+                        <a th:href="@{/product/rating(productId = ${product.id}, rate = 1)}" class="fas fa-star s5" th:style="${userRating >= 1 ? 'color: gold' : ''}"></a>
+<!--                        <a th:href="@{/product/rating(productId = ${product.id}, rate = 1)}" class="fas fa-star s5" th:style="${userRating == 1 ? 'color: gold' : ''}"></a>-->
+                    </div>
+                </div>
+
+                <!-- Rating End -->
+
                 <!-- Comment List Start -->
                 <div class="mb-5">
                     <h3 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">Comments</h3>
                     <div class="d-flex mb-4" th:each="c : ${comments}">
 <!--                            <img src="../img/user.jpg" class="img-fluid" style="width: 45px; height: 45px;">-->
                         <div class="ps-3">
-                            <h6><a href="" th:text="${c.user.username}"></a> <small><i>01 Jan 2045</i></small></h6>
+                            <h6><a href="" th:text="${c.user.username}"></a> <small><i th:text="${c.getFormatDate()}"></i></small></h6>
                             <p th:text="${c.content}"></p>
 <!--                            <button class="btn btn-sm btn-light">Reply</button>-->
                         </div>
@@ -128,7 +149,7 @@
                 <!-- Comment List End -->
 
                 <!-- Comment Form Start -->
-                <div class="bg-light rounded p-5" th:if="${comment} != null">
+                <div class="bg-light rounded p-5" th:if="${isBought} == true">
                     <h3 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">Leave a comment</h3>
                     <form action="/user/comment" method="post">
                         <input type="text" name="productId" th:value="${product.id}" hidden="hidden">
@@ -338,6 +359,9 @@
 
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
+
+    <!-- Star Rating Javascript -->
+    <script src="https://kit.fontawesome.com/5ea815c1d0.js"></script>
 </body>
 
 </html>

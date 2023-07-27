@@ -2,10 +2,12 @@ package com.onlineshop.controller;
 
 import com.onlineshop.model.Comment;
 import com.onlineshop.model.Product;
+import com.onlineshop.model.Rating;
 import com.onlineshop.model.User;
 import com.onlineshop.service.BillService;
 import com.onlineshop.service.CommentService;
 import com.onlineshop.service.ProductService;
+import com.onlineshop.service.RatingService;
 import com.onlineshop.validate.ProductValidate;
 import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class ProductController {
     @Autowired
     BillService billService;
     @Autowired
+    RatingService ratingService;
+    @Autowired
     HttpSession session;
 
     @GetMapping("/product")
@@ -43,8 +47,22 @@ public class ProductController {
     public String toProductDetail(@RequestParam("id") Product product, Model model) {
         model.addAttribute("product", product);
         model.addAttribute("comments", commentService.findAllByProduct(product));
-        if (productService.isBought(product, (User) session.getAttribute("currentUser"))) {
-            model.addAttribute("comment", new Comment());
+        model.addAttribute("productRating", ratingService.getAverageRating(product));
+
+        User user = (User) session.getAttribute("currentUser");
+        if (user != null) {
+            if (productService.isBought(product, user)) {
+                model.addAttribute("isBought", true);
+                model.addAttribute("comment", new Comment());
+            }
+
+            Rating rating = ratingService.findByUserAndProduct(user, product);
+            if (rating != null) {
+                model.addAttribute("userRating", rating.getRate());
+            } else {
+                model.addAttribute("userRating", 0);
+            }
+
         }
         return "/detail";
     }

@@ -1,4 +1,4 @@
-package com.template.templatespringmvc.configuration;
+package com.example.accountmanagement.configuration;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -19,10 +19,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring5.view.ThymeleafViewResolver;
-import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -31,46 +27,17 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.template.templatespringmvc")
+@ComponentScan("com.example.accountmanagement")
 
 @EnableTransactionManagement
 
-@EnableJpaRepositories("com.template.templatespringmvc.repository")
-
-@EnableAspectJAutoProxy
+@EnableJpaRepositories("com.example.accountmanagement.repository")
 public class ApplicationConfiguration implements WebMvcConfigurer, ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
-    }
-
-    //Thymeleaf Configuration
-    @Bean
-    public SpringResourceTemplateResolver templateResolver() {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/views/");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding("UTF-8");
-        return templateResolver;
-    }
-
-    @Bean
-    public SpringTemplateEngine templateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
-        return templateEngine;
-    }
-
-    @Bean
-    public ThymeleafViewResolver viewResolver() {
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine());
-        viewResolver.setCharacterEncoding("UTF-8");
-        return viewResolver;
     }
 
     // Multipart File Configuration
@@ -85,7 +52,7 @@ public class ApplicationConfiguration implements WebMvcConfigurer, ApplicationCo
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations("file:G:\\My Drive\\Study\\Codegym\\Module4\\Extra02-StudentManagement\\src\\main\\webapp\\");
+                .addResourceLocations("file:G:\\My Drive\\Study\\Codegym\\Module4\\Extra06_AccountManagement\\AccountManagement\\src\\main\\webapp");
     }
 
     // Database Connectivity Configuration
@@ -104,7 +71,7 @@ public class ApplicationConfiguration implements WebMvcConfigurer, ApplicationCo
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[]{"com.extra02accountmanagement.model"});
+        em.setPackagesToScan(new String[]{"com.example.accountmanagement.model"});
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());

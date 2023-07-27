@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<h1>Success</h1>
+<button onclick="logout()">Logout</button>
+</body>
+</html>
+<script>
+    function logout() {
+        $.ajax({
+            type : "GET",
+            headers : {
+                "Accept" : "application/json",
+                "Content-Type" : "application/json"
+            },
+            url : "http://localhost:8080/account/logout",
+            success : function(data) {
+                window.location.href="login_register.html";
+            },
+        })
+    }
+</script>

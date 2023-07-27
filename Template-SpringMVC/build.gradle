@@ -27,10 +27,14 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
-    // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+    // Spring MVC framework
     implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.18'
+    // Aspect for AOP
+    implementation group: 'org.springframework', name: 'spring-aspects', version: '5.3.18'
+    // JPA framework
+    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.7.6'
 
-    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5
+    // Thymeleaf
     implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
 
     // Upload files
@@ -44,9 +48,8 @@ dependencies {
     // Validator
     implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.0.Final'
 
-
-    // JPA framework
-    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.7.6'
+    // JSON
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.2'
 }
 
 test {

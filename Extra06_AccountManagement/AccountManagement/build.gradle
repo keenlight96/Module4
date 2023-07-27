@@ -3,7 +3,7 @@ plugins {
     id 'war'
 }
 
-group 'com'
+group 'com.example'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -23,18 +23,14 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     compileOnly('javax.servlet:javax.servlet-api:4.0.1')
-    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.32'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
     // Spring MVC framework
     implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.18'
-    // Aspect for AOP
-    implementation group: 'org.springframework', name: 'spring-aspects', version: '5.3.18'
-
-    // Thymeleaf
-    implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
+    // JPA framework
+    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.7.6'
 
     // Upload files
     implementation group: 'commons-fileupload', name:'commons-fileupload', version: '1.3.3'
@@ -44,11 +40,14 @@ dependencies {
     implementation 'org.hibernate:hibernate-entitymanager:5.6.3.Final'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
     implementation group: 'org.springframework', name: 'spring-orm', version: '4.3.17.RELEASE'
-    // Validation
-    implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.0.Final'
 
-    // JPA framework
-    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.7.6'
+    // JSON
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.2'
+
+    // Spring Security
+    implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.4.2'
+    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.4.2'
+    implementation group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.4.2'
 }
 
 test {

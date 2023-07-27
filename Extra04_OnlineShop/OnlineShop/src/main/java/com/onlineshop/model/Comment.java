@@ -1,6 +1,8 @@
 package com.onlineshop.model;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 @Entity
 public class Comment {
@@ -12,6 +14,7 @@ public class Comment {
     @ManyToOne
     private Product product;
     private String content;
+    private Date date;
 
     public Comment() {
     }
@@ -21,6 +24,7 @@ public class Comment {
         this.user = user;
         this.product = product;
         this.content = content;
+        date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
     }
 
     public int getId() {
@@ -53,5 +57,22 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setCurrentDate() {
+        this.date = new java.sql.Date(new Date(System.currentTimeMillis()).getTime());
+    }
+
+    public String getFormatDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return simpleDateFormat.format(date);
     }
 }
